@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             mBLEService = null;
         }
     };
+
+    private boolean toggleOn = false;
     private TextView txtTemp;
     private TextView txtCurrent;
     private ConstraintLayout layout;
@@ -101,6 +103,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSwitched(LabeledSwitch labeledSwitch, boolean isOn) {
                 if (isOn) {
+                    toggleOn = true;
                     mBLEService.sendPacket((char) 20, (char) 1);
                 } else {
                     mBLEService.sendPacket((char) 20, (char) 0);
@@ -178,10 +181,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 if (mBLEService.current > 5.0f) {
-                    if (!toggle.isOn()) {
+                    if (toggleOn) {
+                        toggleOn = false;
                         water.playAnimation();
                         water.loop(true);
-                        toggle.setOn(true);
                     }
                 } else if (mBLEService.current == 0.0f) {
                     if (mBLEService.current_temperature > 90f)
