@@ -5,6 +5,7 @@ Android part of Kettle IoT project made by [IdeoG](https://github.com/ideog).
 ## Requirements
 
 - Arduino Nano __microcontroller__
+- JDY10 __BLE module__
 - ACS712 __current measurer up to 20A__
 - 220V to 5V adapter __DC power supply for curcuitry__
 - ds18b20 __temperature sensor__
